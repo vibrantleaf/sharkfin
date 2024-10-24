@@ -19,6 +19,7 @@ distrobox create blue-build --image ghcr.io/blue-build/cli:latest
 distrobox enter blue-build
 distrobox-export --bin $(which bluebuild)
 exit 0
+mkdir -p ~/.local/share/bash-completion/completions/ ~/.local/share/fish/generated_completions/
 bluebuild completions bash | tee ~/.local/share/bash-completion/completions/bluebuild
 bluebuild completions fish | tee ~/.local/share/fish/generated_completions/bluebuild.fish
 #bluebuild completions zsh #idk how to add completions to zsh if you use zsh you can figure it out yourself 
