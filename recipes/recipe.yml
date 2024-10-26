@@ -72,17 +72,18 @@ modules:
       - gstreamer1-plugins-ugly
       - gstreamer1-vaapi
       - ffmpeg
-      - libva
-
+      
   # make sure rpmfusion firmware installed 
   - type: script
     snippets:
       - "rpm-ostree install *-firmware"
  
 # steam
-  - type: rpm-ostree
-    install:
-      - steam
+  - type: script
+    snippets:
+      - "rpm-ostree install libva"
+      - "rpm-ostree replace --from repo='fedora' libva
+      - "rpm-ostree install steam
 
 # flathub
   - type: default-flatpaks
