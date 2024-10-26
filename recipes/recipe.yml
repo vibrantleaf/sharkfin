@@ -61,17 +61,6 @@ modules:
       - android-tools
       - scrcpy
       - waydroid
-  
-  # make sure codecs are installed    
-  - type: rpm-ostree
-    install:
-      - libdvdcss
-      - gstreamer1-plugin-libav
-      - gstreamer1-plugins-bad-free-extras
-      - gstreamer1-plugins-bad-freeworld
-      - gstreamer1-plugins-ugly
-      - gstreamer1-vaapi
-      - ffmpeg
       
   # make sure rpmfusion firmware installed 
   - type: script
@@ -82,7 +71,7 @@ modules:
   - type: script
     snippets:
       - "rpm-ostree install libva"
-      - "rpm-ostree override replace --experimental --from repo='fedora' libva"
+      - "rpm-ostree override replace --experimental --from repo='fedora' libva libvdpau"
       - "rpm-ostree install steam"
 
 # flathub
@@ -153,6 +142,17 @@ modules:
   - type: gschema-overrides
     include:
       - gnome_settings.gschema.override
+
+  # make sure codecs are installed    
+  - type: rpm-ostree
+    install:
+      - libdvdcss
+      - gstreamer1-plugin-libav
+      - gstreamer1-plugins-bad-free-extras
+      - gstreamer1-plugins-bad-freeworld
+      - gstreamer1-plugins-ugly
+      - gstreamer1-vaapi
+      - ffmpeg
 
   # unsetup copr & rpm repos for release
   - type: script
