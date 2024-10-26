@@ -26,4 +26,6 @@ remove-waydroid:
     echo "Stopping the Waydroid Servive"
     sudo waydroid service stop
     echo "removing waydroid data"
-    rm -rf .local/share/waydroid/data/
+    rm -rf ~/.local/share/waydroid/data/
+    echo "removing waydroid desktop files"
+    rm -rf ~/.local/share/appications/waydroid.*.desktop
