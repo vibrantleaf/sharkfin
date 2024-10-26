@@ -66,7 +66,18 @@ modules:
   - type: script
     snippets:
       - "rpm-ostree install *-firmware"
- 
+
+   # make sure codecs are installed    
+  - type: rpm-ostree
+    install:
+      - libdvdcss
+      - gstreamer1-plugin-libav
+      - gstreamer1-plugins-bad-free-extras
+      - gstreamer1-plugins-bad-freeworld
+      - gstreamer1-plugins-ugly
+      - gstreamer1-vaapi
+      - ffmpeg
+      
 # steam yoinked from https://github.com/ublue-os/bazzite/blob/main/Containerfile
   - type: rpm-ostree
     install:
@@ -166,17 +177,6 @@ modules:
   - type: gschema-overrides
     include:
       - gnome_settings.gschema.override
-
-  # make sure codecs are installed    
-  - type: rpm-ostree
-    install:
-      - libdvdcss
-      - gstreamer1-plugin-libav
-      - gstreamer1-plugins-bad-free-extras
-      - gstreamer1-plugins-bad-freeworld
-      - gstreamer1-plugins-ugly
-      - gstreamer1-vaapi
-      - ffmpeg
 
   # unsetup copr & rpm repos for release
   - type: script
