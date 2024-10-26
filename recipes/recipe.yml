@@ -82,7 +82,7 @@ modules:
   - type: script
     snippets:
       - "rpm-ostree install libva"
-      - "rpm-ostree replace --from repo='fedora' libva"
+      - "rpm-ostree override replace --from repo='fedora' libva --force "
       - "rpm-ostree install steam"
 
 # flathub
