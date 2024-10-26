@@ -168,7 +168,7 @@ modules:
     #validate: true
     validate: false
     include:
-      - 95-setup-waydroid.just
+      - 95-leafbluefin-waydroid.just
 
   # gnome extentions
   - type: gnome-extensions
