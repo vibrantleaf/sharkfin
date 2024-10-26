@@ -79,11 +79,10 @@ modules:
     snippets:
       - "rpm-ostree install *-firmware"
  
-## steam
-#  - type: rpm-ostree
-#    install:
-#      - steam
-# ^^^^ remved because of dependency bug 
+# steam
+  - type: rpm-ostree
+    install:
+      - steam
 
 # flathub
   - type: default-flatpaks
@@ -105,7 +104,7 @@ modules:
       - ProtonPlus: com.vysp3r.ProtonPlus
       - Lutris: net.lutris.Lutris
       - Flatseal: com.github.tchx84.Flatseal
-      - Steam: com.valvesoftware.Steam
+      #- Steam: com.valvesoftware.Steam
       - AdwSteamGTK (GTK4/LibAdwata Themer for Steam): io.github.Foldex.AdwSteamGtk
       - AddWater (GTK4/LibAdwata Themer for Firefox): dev.qwery.AddWater
 
