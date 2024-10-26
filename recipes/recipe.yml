@@ -70,7 +70,6 @@ modules:
 # steam yoinked from https://github.com/ublue-os/bazzite/blob/main/Containerfile
   - type: rpm-ostree
     install:
-      - jupiter-sd-mounting-btrfs
       - at-spi2-core.i686
       - atk.i686
       - vulkan-loader.i686
