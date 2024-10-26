@@ -70,8 +70,8 @@ modules:
 # steam
   - type: script
     snippets:
-      - "rpm-ostree install libva"
-      - "rpm-ostree override replace --experimental --from repo='fedora' libva libvdpau"
+      #- "rpm-ostree install libva"
+      #- "rpm-ostree override replace --experimental --from repo='fedora' libva libvdpau libvdpau"
       - "rpm-ostree install steam"
 
 # flathub
