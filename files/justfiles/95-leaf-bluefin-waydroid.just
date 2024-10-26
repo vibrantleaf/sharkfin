@@ -12,12 +12,12 @@ setup-waydroid-gapps:
         --vendor_channel https://ota.waydro.id/vendor \
         --system_type GAPPS
 
-# Initialise waydroid using the foss system type
-setup-waydroid-foss:
-    sudo waydroid init --force \
-        --system_channel https://ota.waydro.id/system \
-        --vendor_channel https://ota.waydro.id/vendor \
-        --system_type FOSS
+# stop waydroid
+stop-waydroid:
+    echo "Stopping the Waydroid Sesson"
+    sudo waydroid session stop
+    echo "Stopping the Waydroid Servive"
+    sudo waydroid service stop
 
 # Unsetup waydroid
 remove-waydroid:
@@ -27,4 +27,3 @@ remove-waydroid:
     sudo waydroid service stop
     echo "removing waydroid data"
     rm -rf .local/share/waydroid/data/
-     
