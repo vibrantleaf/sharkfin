@@ -1,4 +1,4 @@
-name: leaf-bluefin
+name: sharkfin
 description: just my personal bluefin.
 base-image: ghcr.io/ublue-os/bluefin-dx
 image-version: latest
@@ -139,7 +139,7 @@ modules:
     validate: true
     #validate: false
     include:
-      - 95-leafbluefin-waydroid.just
+      - 95-sharkfin-waydroid.just
 
   # gnome extentions
   - type: gnome-extensions

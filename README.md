@@ -1,15 +1,16 @@
 # Purpose
 I like bluefin, I just wanted to change a couple of little things and add a few nice extras.
 
+(formerly referred to as leaf-bluefin)
 #### how to rebase via rpm-ostree
 ```sh
 # verify the image signiture is correct
-wget -O /tmp/leaf-bluefin-cosign.pub https://raw.githubusercontent.com/vibrantleaf/leaf-bluefin/refs/heads/main/cosign.pub
-cosign verify --key /tmp/leaf-bluefin-cosign.pub ghcr.io/vibrantleaf/leaf-bluefin:latest
-rm /tmp/leaf-bluefin-cosign.pub
+wget -O /tmp/sharkfin-cosign.pub https://raw.githubusercontent.com/vibrantleaf/sharkfin/refs/heads/main/cosign.pub
+cosign verify --key /tmp/sharkfin-cosign.pub ghcr.io/vibrantleaf/sharkfin:latest
+rm /tmp/sharkfin-cosign.pub
 
 # rebase to the image
-sudo rpm-ostree rebase ostree-image-signed:docker://ghcr.io/vibrantleaf/leaf-bluefin:latest
+sudo rpm-ostree rebase ostree-image-signed:docker://ghcr.io/vibrantleaf/sharkfin:latest
 ```
 
 ### build localy for testing
@@ -25,22 +26,22 @@ bluebuild completions fish | tee ~/.local/share/fish/generated_completions/blueb
 #bluebuild completions zsh #idk how to add completions to zsh if you use zsh you can figure it out yourself 
 
 # Get the Image SourceCode
-git clone https://github.com/vibrantleaf/leaf-bluefin.git /var/tmp/leaf-bluefin
-cd /var/tmp/leaf-bluefin
+git clone https://github.com/vibrantleaf/sharkfin.git /var/tmp/sharkfin
+cd /var/tmp/sharkfin
 git pull
 
 # Generate Contianerfile from the recipe.yaml
-bluebuild generate -o /var/tmp/leaf-bluefin/Containerfile /var/tmp/leaf-bluefin/recipes/recipe.yaml
+bluebuild generate -o /var/tmp/sharkfin/Containerfile /var/tmp/sharkfin/recipes/recipe.yaml
 
 # Build the Image using Podman
-podman build -t leaf-bluefin-test-build:latest /var/tmp/leaf-bluefin
+podman build -t sharkfin-test-build:latest /var/tmp/sharkfin
 
 # or Build the Image using Buildah
-buildah bud -t leaf-bluefin-test-build:latest /var/tmp/leaf-bluefin
+buildah bud -t sharkfin-test-build:latest /var/tmp/sharkfin
 
 # or Build the Image using Docker
-ln -s /var/tmp/leaf-bluefin/Containerfile /var/tmp/leaf-bluefin/Dockerfile # symlink Containerfile to Dockerfile for better Docker Compatibility
-docker build -t leaf-bluefin-test-build:latest /var/tmp/leaf-bluefin
+ln -s /var/tmp/sharkfin/Containerfile /var/tmp/sharkfin/Dockerfile # symlink Containerfile to Dockerfile for better Docker Compatibility
+docker build -t sharkfin-test-build:latest /var/tmp/sharkfin
 
 # or Build the Immage using Blue Build CLI directly
 # via podman
@@ -72,14 +73,14 @@ bluebuild build \
    
 
 # Create and Run a test Container from the Test Build Image using Podman
-podman run -it --rm --name leaf-bluefin-test-build-container leaf-bluefin-test-build:latest /usr/bin/bash
+podman run -it --rm --name sharkfin-test-build-container sharkfin-test-build:latest /usr/bin/bash
 
 # or Create and Run a test Container from the Test Build Image using Docker
-docker run -it --rm --name leaf-bluefin-test-build-container leaf-bluefin-test-build:latest /usr/bin/bash
+docker run -it --rm --name sharkfin-test-build-container sharkfin-test-build:latest /usr/bin/bash
 
 # Clean up
 cd ~
-rm -rf /var/tmp/leaf-bluefin
+rm -rf /var/tmp/sharkfin
 ```
 
 ### things i changed & why
