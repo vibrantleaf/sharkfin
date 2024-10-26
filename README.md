@@ -105,7 +105,7 @@ rm -rf /var/tmp/leaf-bluefin
 - gamemode , gamescope , qt5-base & mangohud: for gaming stuff 
 - All gstreamer media codecs: for wider media file support
 - libdvdcss: for dvd/bluray playback support
-- modular libvirtd systemd services & tuned: for better virtualisaion
+- tuned:
 - rpmfusion fireware: 
 # changed
 - default settings chaged
