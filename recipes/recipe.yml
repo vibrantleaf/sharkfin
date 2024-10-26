@@ -15,6 +15,11 @@ modules:
   - type: script
     scripts:
       - setup_repos.sh
+
+  #steam
+  - type: rpm-ostree
+    install:
+      - steam 
       
   # removed packages
   - type: rpm-ostree
@@ -78,10 +83,7 @@ modules:
       - gstreamer1-vaapi
       - ffmpeg
       
-# steam
-  - type: rpm-ostree
-    install:
-      - steam 
+
 
 # flathub
   - type: default-flatpaks
