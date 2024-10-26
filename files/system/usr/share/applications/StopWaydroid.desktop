@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=StopWaydroid
+Comment=Stop Waydroid
+Exec=pkexec $(waydroid session stop && waydroid container stop)
+Terminal=true
+Icon=waydroid
+Categories=X-WayDroid-App;
