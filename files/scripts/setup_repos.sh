@@ -72,7 +72,7 @@ fi
 # rpmfusion-nonfree-steam
 if [ -f /etc/yum.repos.d/rpmfusion-nonfree-steam.repo ]
 then
-  sed -i '0,/enabled=0/s//enabled=1/' /etc/yum.repos.d/rpmfusion-nonfree-steam.repo
+  sed -i '0,/enabled=1/s//enabled=0/' /etc/yum.repos.d/rpmfusion-nonfree-steam.repo
 else
   echo 'file /etc/yum.repos.d/rpmfusion-nonfree-steam.repo is missing'
   exit 1
