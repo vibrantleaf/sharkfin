@@ -18,3 +18,13 @@ setup-waydroid-foss:
         --system_channel https://ota.waydro.id/system \
         --vendor_channel https://ota.waydro.id/vendor \
         --system_type FOSS
+
+# Unsetup waydroid
+remove-waydroid:
+    echo "Stopping the Waydroid Sesson"
+    sudo waydroid session stop
+    echo "Stopping the Waydroid Servive"
+    sudo waydroid service stop
+    echo "removing waydroid data"
+    rm -rf .local/share/waydroid/data/
+     
