@@ -163,10 +163,11 @@ modules:
       - openrgb-udev-rules
       - steam-devices
       - solaar-udev
+      
  # justfiles
   - type: justfiles
-    #validate: true
-    validate: false
+    validate: true
+    #validate: false
     include:
       - 95-leafbluefin-waydroid.just
 
