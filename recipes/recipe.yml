@@ -11,7 +11,7 @@ modules:
     repos:
       - https://copr.fedorainfracloud.org/coprs/zeno/scrcpy/repo/fedora-%OS_VERSION%/zeno-scrcpy-fedora-%OS_VERSION%.repo
       - https://copr.fedorainfracloud.org/coprs/matte-schwartz/sunshine/repo/fedora-%OS_VERSION%/matte-schwartz-sunshine-fedora-%OS_VERSION%.repo
-    install:type
+    install:
       - https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-%OS_VERSION%.noarch.rpm
       - https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-%OS_VERSION%.noarch.rpm
   - tyoe: rpm-ostree
@@ -121,6 +121,8 @@ modules:
     include:
       - gnome_settings.gschema.override
   - type: script
-    scripts:
-      - branding.sh
+   snippet:
+     - "sed -i 's@bluefin-dx@sharkfin@g' /usr/share/ublue-os/image-info.json"
+     - "sed -i 's@ublue-os@vibrantleaf@g' /usr/share/ublue-os/image-info.json"
+     - "sed -i 's@ghcr.io/ublue-os/bluefin-dx@ghcr.io/vibrantlef/sharkfin@g' /usr/share/ublue-os/image-info.json"
   - type: signing
