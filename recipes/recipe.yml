@@ -12,19 +12,9 @@ modules:
         destination: /
 
   # setup repos
-  - type: rpm-ostree
-    repos:
-      - https://copr.fedorainfracloud.org/coprs/zeno/scrcpy/repo/fedora-%OS_VERSION%/zeno-scrcpy-fedora-%OS_VERSION%.repo
-      - https://copr.fedorainfracloud.org/coprs/matte-schwartz/sunshine/repo/fedora-%OS_VERSION%/matte-schwartz-sunshine-fedora-%OS_VERSION%.repo
-    install:
-      - https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-%OS_VERSION%.noarch.rpm
-      - https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-%OS_VERSION%.noarch.rpm
-  
-  # rpmfusion tainted repos
-  - type: rpm-ostree
-    install:
-      - rpmfusion-free-release-tainted
-      - rpmfusion-nonfree-release-tainted
+  - type: script
+    scripts:
+      - setup_repos.sh
 
   # remove unwanted packages
   - type: rpm-ostree
