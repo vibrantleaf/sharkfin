@@ -26,6 +26,27 @@ modules:
       - rpmfusion-free-release-tainted
       - rpmfusion-nonfree-release-tainted
 
+  # remove unwanted packages
+  - type: rpm-ostree
+    remove:
+      - gnome-shell-extension-search-light
+      - gnome-shell-extension-logo-menu
+      - gnome-classic-session
+      - gnome-classic-session-xsession
+      - yaru-theme
+      - containerd.io
+      - docker-ce
+      - docker-ce-cli
+      - docker-buildx-plugin
+      - docker-compose-plugin
+      - docker-ce-rootless-extras
+      - devpod
+
+  # install steam
+  - type: rpm-ostree
+    replace:
+      - steam
+
   # install wanted packages
   - type: rpm-ostree
     install:
@@ -66,27 +87,6 @@ modules:
       - steam-devices
       - solaar-udev
       
-  # remove unwanted packages
-  - type: rpm-ostree
-    remove:
-      - gnome-shell-extension-search-light
-      - gnome-shell-extension-logo-menu
-      - gnome-classic-session
-      - gnome-classic-session-xsession
-      - yaru-theme
-      - containerd.io
-      - docker-ce
-      - docker-ce-cli
-      - docker-buildx-plugin
-      - docker-compose-plugin
-      - docker-ce-rootless-extras
-      - devpod
-
-  # install steam
-  - type: rpm-ostree
-    replace:
-      - steam
-
   # scripts
   - type: script
     scripts:
