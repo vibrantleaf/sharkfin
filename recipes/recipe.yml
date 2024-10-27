@@ -17,9 +17,9 @@ modules:
       - setup_repos.sh
 
   #steam
-  - type: rpm-ostree
-    install:
-      - steam 
+  - type: script
+    snippet:
+      - "rpm-ostree override replace steam" 
       
   # removed packages
   - type: rpm-ostree
