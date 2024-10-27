@@ -26,7 +26,7 @@ modules:
       - rpmfusion-free-release-tainted
       - rpmfusion-nonfree-release-tainted
 
-  # packages
+  # install wanted packages
   - type: rpm-ostree
     install:
       - gnome-shell-extension-caffeine
@@ -65,6 +65,9 @@ modules:
       - openrgb-udev-rules
       - steam-devices
       - solaar-udev
+      
+  # remove unwanted packages
+  - type: rpm-ostree
     remove:
       - gnome-shell-extension-search-light
       - gnome-shell-extension-logo-menu
@@ -78,6 +81,9 @@ modules:
       - docker-compose-plugin
       - docker-ce-rootless-extras
       - devpod
+
+  # install steam
+  - type: rpm-ostree
     replace:
       - steam
 
