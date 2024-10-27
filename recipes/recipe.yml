@@ -2,11 +2,14 @@ name: sharkfin
 description: just my personal bluefin.
 base-image: ghcr.io/ublue-os/bluefin-dx
 image-version: latest
+
 modules:
+
   - type: files
     files:
       - source: system
         destination: /
+  
   - type: rpm-ostree
     repos:
       - https://copr.fedorainfracloud.org/coprs/zeno/scrcpy/repo/fedora-%OS_VERSION%/zeno-scrcpy-fedora-%OS_VERSION%.repo
@@ -14,10 +17,12 @@ modules:
     install:
       - https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-%OS_VERSION%.noarch.rpm
       - https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-%OS_VERSION%.noarch.rpm
+  
   - tyoe: rpm-ostree
     install:
       - rpmfusion-free-release-tainted
       - rpmfusion-nonfree-release-tainted
+  
   - type: script
     scripts:
       - branding.sh
@@ -28,6 +33,7 @@ modules:
       - "cp -rfv /var/tmp/game-devices-udev/*.rules /usr/share/ublue-os/udev-rules/etc/udev/rules.d"
       - "cp -rfv /var/tmp/realtek-r8152-udev/*.rules /usr/share/ublue-os/udev-rules/etc/udev/rules.d"
       - "rm -rfv /var/tmp/game-devices-udev /var/tmp/realtek-r8152-udev"
+  
   - type: rpm-ostree
     replace:
       - steam
@@ -81,6 +87,7 @@ modules:
       - openrgb-udev-rules
       - steam-devices
       - solaar-udev
+      
   - type: default-flatpaks
     notify: true 
     system:
@@ -100,6 +107,7 @@ modules:
       - com.github.tchx84.Flatseal
       - io.github.Foldex.AdwSteamGtk
       - dev.qwery.AddWater
+      
   - type: systemd
     system:
       enabled:
@@ -109,17 +117,21 @@ modules:
     user:
       enabled:
         - podman.socket
+        
   - type: justfiles
     validate: true
     include:
       - 95-sharkfin-waydroid.just
+      
   - type: gnome-extensions
     install:
       - 4655
       - 6784
       - 3733
       - 5547
+      
   - type: gschema-overrides
     include:
       - gnome_settings.gschema.override
+      
   - type: signing
