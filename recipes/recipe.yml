@@ -18,7 +18,6 @@ modules:
       - rpmfusion-nonfree-release-tainted
   - type: script
     snippet:
-      - "rpm-ostree override replace steam"
       - "rpm-ostree install *-firmware"
       - "git clone https://github.com/fabiscafe/game-devices-udev.git /var/tmp/game-devices-udev"
       - "git clone https://github.com/wget/realtek-r8152-linux.git /var/tmp/realtek-r8152-udev"
@@ -26,6 +25,8 @@ modules:
       - "cp -rfv /var/tmp/realtek-r8152-udev/*.rules /usr/share/ublue-os/udev-rules/etc/udev/rules.d"
       - "rm -rfv /var/tmp/game-devices-udev /var/tmp/realtek-r8152-udev"
   - type: rpm-ostree
+    replace:
+      - steam
     remove:
       - gnome-shell-extension-search-light
       - gnome-shell-extension-logo-menu
@@ -85,12 +86,13 @@ modules:
     install:
       - org.mozilla.firefox
       - org.libreoffice.libreoffice
-      - org.mozilla.Thunderbird
       - org.localsend.localsend_app
+      - org.gnome.Geary
       - dev.geopjr.Collision
       - org.gnome.World.Secrets
+      - com.belmoussaoui.Authenticator
       - com.vysp3r.ProtonPlus
-      - net.lutris.Lutris
+      - com.usebottles.bottles
       - com.github.tchx84.Flatseal
       - io.github.Foldex.AdwSteamGtk
       - dev.qwery.AddWater
@@ -103,7 +105,7 @@ modules:
     user:
       enabled:
         - podman.socket
-   - type: justfiles
+  - type: justfiles
     validate: true
     include:
       - 95-sharkfin-waydroid.just
