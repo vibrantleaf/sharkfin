@@ -19,6 +19,8 @@ modules:
       - rpmfusion-free-release-tainted
       - rpmfusion-nonfree-release-tainted
   - type: script
+    scripts:
+      - branding.sh
     snippet:
       - "rpm-ostree install *-firmware"
       - "git clone https://github.com/fabiscafe/game-devices-udev.git /var/tmp/game-devices-udev"
@@ -26,8 +28,6 @@ modules:
       - "cp -rfv /var/tmp/game-devices-udev/*.rules /usr/share/ublue-os/udev-rules/etc/udev/rules.d"
       - "cp -rfv /var/tmp/realtek-r8152-udev/*.rules /usr/share/ublue-os/udev-rules/etc/udev/rules.d"
       - "rm -rfv /var/tmp/game-devices-udev /var/tmp/realtek-r8152-udev"
-      - "sed -i 's@bluefin-dx@sharkfin@g' /usr/share/ublue-os/image-info.json"
-      - "sed -i 's@ublue-os@vibrantleaf@g' /usr/share/ublue-os/image-info.json"
   - type: rpm-ostree
     replace:
       - steam
