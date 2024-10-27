@@ -23,8 +23,8 @@ modules:
   # rpmfusion tainted repos
   - type: rpm-ostree
     install:
-      - rpmfusion-free-tainted-release
-      - rpmfusion-nonfree-tainted-release
+      - rpmfusion-free-release-tainted
+      - rpmfusion-nonfree-release-tainted
       
   # scripts
   - type: script
