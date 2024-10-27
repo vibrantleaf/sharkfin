@@ -26,6 +26,8 @@ modules:
       - "cp -rfv /var/tmp/game-devices-udev/*.rules /usr/share/ublue-os/udev-rules/etc/udev/rules.d"
       - "cp -rfv /var/tmp/realtek-r8152-udev/*.rules /usr/share/ublue-os/udev-rules/etc/udev/rules.d"
       - "rm -rfv /var/tmp/game-devices-udev /var/tmp/realtek-r8152-udev"
+      - "sed -i 's@bluefin-dx@sharkfin@g' /usr/share/ublue-os/image-info.json"
+      - "sed -i 's@ublue-os@vibrantleaf@g' /usr/share/ublue-os/image-info.json"
   - type: rpm-ostree
     replace:
       - steam
@@ -120,9 +122,4 @@ modules:
   - type: gschema-overrides
     include:
       - gnome_settings.gschema.override
-  - type: script
-    snippet:
-      - "sed -i 's@bluefin-dx@sharkfin@g' /usr/share/ublue-os/image-info.json"
-      - "sed -i 's@ublue-os@vibrantleaf@g' /usr/share/ublue-os/image-info.json"
-      - "sed -i 's@ghcr.io/ublue-os/bluefin-dx@ghcr.io/vibrantlef/sharkfin@g' /usr/share/ublue-os/image-info.json"
   - type: signing
