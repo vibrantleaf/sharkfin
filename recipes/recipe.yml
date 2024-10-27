@@ -25,36 +25,9 @@ modules:
     install:
       - rpmfusion-free-release-tainted
       - rpmfusion-nonfree-release-tainted
-      
-  # scripts
-  - type: script
-    scripts:
-      - branding.sh
-    snippet:
-      - "rpm-ostree install *-firmware"
-      - "git clone https://github.com/fabiscafe/game-devices-udev.git /var/tmp/game-devices-udev"
-      - "git clone https://github.com/wget/realtek-r8152-linux.git /var/tmp/realtek-r8152-udev"
-      - "cp -rfv /var/tmp/game-devices-udev/*.rules /usr/share/ublue-os/udev-rules/etc/udev/rules.d"
-      - "cp -rfv /var/tmp/realtek-r8152-udev/*.rules /usr/share/ublue-os/udev-rules/etc/udev/rules.d"
-      - "rm -rfv /var/tmp/game-devices-udev /var/tmp/realtek-r8152-udev"
 
   # packages
   - type: rpm-ostree
-    replace:
-      - steam
-    remove:
-      - gnome-shell-extension-search-light
-      - gnome-shell-extension-logo-menu
-      - gnome-classic-session
-      - gnome-classic-session-xsession
-      - yaru-theme
-      - containerd.io
-      - docker-ce
-      - docker-ce-cli
-      - docker-buildx-plugin
-      - docker-compose-plugin
-      - docker-ce-rootless-extras
-      - devpod
     install:
       - gnome-shell-extension-caffeine
       - podman-docker
@@ -92,6 +65,33 @@ modules:
       - openrgb-udev-rules
       - steam-devices
       - solaar-udev
+    remove:
+      - gnome-shell-extension-search-light
+      - gnome-shell-extension-logo-menu
+      - gnome-classic-session
+      - gnome-classic-session-xsession
+      - yaru-theme
+      - containerd.io
+      - docker-ce
+      - docker-ce-cli
+      - docker-buildx-plugin
+      - docker-compose-plugin
+      - docker-ce-rootless-extras
+      - devpod
+    replace:
+      - steam
+
+  # scripts
+  - type: script
+    scripts:
+      - branding.sh
+    snippet:
+      - "rpm-ostree install *-firmware"
+      - "git clone https://github.com/fabiscafe/game-devices-udev.git /var/tmp/game-devices-udev"
+      - "git clone https://github.com/wget/realtek-r8152-linux.git /var/tmp/realtek-r8152-udev"
+      - "cp -rfv /var/tmp/game-devices-udev/*.rules /usr/share/ublue-os/udev-rules/etc/udev/rules.d"
+      - "cp -rfv /var/tmp/realtek-r8152-udev/*.rules /usr/share/ublue-os/udev-rules/etc/udev/rules.d"
+      - "rm -rfv /var/tmp/game-devices-udev /var/tmp/realtek-r8152-udev"
 
   # flathub
   - type: default-flatpaks
