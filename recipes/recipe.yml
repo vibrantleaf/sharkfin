@@ -5,11 +5,13 @@ image-version: latest
 
 modules:
 
+  # copy files to the image
   - type: files
     files:
       - source: system
         destination: /
-  
+
+  # setup repos
   - type: rpm-ostree
     repos:
       - https://copr.fedorainfracloud.org/coprs/zeno/scrcpy/repo/fedora-%OS_VERSION%/zeno-scrcpy-fedora-%OS_VERSION%.repo
@@ -18,11 +20,13 @@ modules:
       - https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-%OS_VERSION%.noarch.rpm
       - https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-%OS_VERSION%.noarch.rpm
   
-  - tyoe: rpm-ostree
+  # rpmfusion tainted repos
+  - type: rpm-ostree
     install:
-      - rpmfusion-free-release-tainted
-      - rpmfusion-nonfree-release-tainted
-  
+      - rpmfusion-free-tainted-release
+      - rpmfusion-nonfree-tainted-release
+      
+  # scripts
   - type: script
     scripts:
       - branding.sh
@@ -33,7 +37,8 @@ modules:
       - "cp -rfv /var/tmp/game-devices-udev/*.rules /usr/share/ublue-os/udev-rules/etc/udev/rules.d"
       - "cp -rfv /var/tmp/realtek-r8152-udev/*.rules /usr/share/ublue-os/udev-rules/etc/udev/rules.d"
       - "rm -rfv /var/tmp/game-devices-udev /var/tmp/realtek-r8152-udev"
-  
+
+  # packages
   - type: rpm-ostree
     replace:
       - steam
@@ -87,7 +92,8 @@ modules:
       - openrgb-udev-rules
       - steam-devices
       - solaar-udev
-      
+
+  # flathub
   - type: default-flatpaks
     notify: true 
     system:
@@ -107,7 +113,8 @@ modules:
       - com.github.tchx84.Flatseal
       - io.github.Foldex.AdwSteamGtk
       - dev.qwery.AddWater
-      
+
+  # systemd services & sockets
   - type: systemd
     system:
       enabled:
@@ -117,21 +124,26 @@ modules:
     user:
       enabled:
         - podman.socket
-        
+      
+ # justfiles
   - type: justfiles
     validate: true
+    #validate: false
     include:
       - 95-sharkfin-waydroid.just
-      
+
+  # gnome extentions
   - type: gnome-extensions
     install:
       - 4655
       - 6784
       - 3733
       - 5547
-      
+
+  # gnome-settings
   - type: gschema-overrides
     include:
       - gnome_settings.gschema.override
-      
+  
+  # sign the image
   - type: signing
