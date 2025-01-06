@@ -57,9 +57,9 @@ RUN vibrant-updater --version
 
 ARG BASE_IMAGE_NAME="bazzite-gnome"
 ARG FEDORA_MAJOR_VERSION="41"
-ARG BASE_IMAGE="ghcr.io/ublue-os/bazzite-gnome-deck"
+ARG BASE_IMAGE="ghcr.io/ublue-os/bazzite-gnome"
 ARG UBLUE_TAG=${FEDORA_MAJOR_VERSION}-latest
-FROM ghcr.io/ublue-os/bazzite-gnome-deck:${UBLUE_TAG}
+FROM ghcr.io/ublue-os/bazzite-gnome:latest
 ARG AKMODS_FLAVOR="coreos-stable"
 ARG BASE_IMAGE_NAME="bazzite-gnome"
 ARG IMAGE_NAME="sharkfin"
