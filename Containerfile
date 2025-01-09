@@ -1,21 +1,25 @@
+# syntax=docker/dockerfile:1
+
 ###############################################################
 ### Start of vibrant-updater                                ###
 ### LICENSE: BSD 3-Clause                                   ###
 ### author: vibrantleaf                                     ###
 ### from: https://codeberg.org/vibrantleaf/vibrant-updater/ ###
-#########@#####################################################
+###############################################################
 
 FROM cgr.dev/chainguard/git:latest AS git
 RUN git clone https://codeberg.org/vibrantleaf/vibrant-updater.git /home/git/source/
 WORKDIR /home/git/source
 RUN git fetch --tags
 RUN git checkout $(git describe --tags "$(git rev-list --tags --max-count=1)")
+RUN rm -rf /var/cache/* /tmp/* /opt/* /var/log/*
 FROM cgr.dev/chainguard/go:latest AS go
 COPY --from=git /home/git/source/ /opt/source
 WORKDIR /opt/source
 RUN go build \
   -o /opt/source/bin/vibrant-updater.bin \
   /opt/source/src/vibrant_updater.go
+RUN rm -rf /var/cache/* /tmp/* /opt/* /var/log/*
 FROM quay.io/fedora/fedora-minimal:latest AS vibrantupdater
 RUN dnf update -y
 COPY --from=go /opt/source /opt/source
@@ -56,11 +60,23 @@ RUN vibrant-updater --version
 ### from: https://github.com/vibrantleaf/sharkfin ### 
 #####################################################
 
+FROM cgr.dev/chainguard/python:latest-dev AS python
+WORKDIR /app
+RUN python -m venv venv
+ENV PATH="/app/venv/bin":$PATH
+RUN pip install install --upgrade gnome-extensions-cli
+gnome-extensions-cli --help
+RUN NO_COLOR=1 gext install 4655
+RUN NO_COLOR=1 gext install 6784
+RUN NO_COLOR=1 gext install 3733
+RUN NO_COLOR=1 gext install 5547
+RUN rm -rf /var/cache/* /tmp/* /opt/* /var/log/*
+
+FROM ghcr.io/ublue-os/bazzite-deck-gnome:latest
 ARG BASE_IMAGE_NAME=" bazzite-deck-gnome"
 ARG FEDORA_MAJOR_VERSION="41"
-ARG BASE_IMAGE="ghcr.io/ublue-os/ bazzite-deck-gnome"
+ARG BASE_IMAGE="ghcr.io/ublue-os/bazzite-deck-gnome"
 ARG UBLUE_TAG=${FEDORA_MAJOR_VERSION}-latest
-FROM ghcr.io/ublue-os/bazzite-deck-gnome:latest 
 ARG AKMODS_FLAVOR="coreos-stable"
 ARG BASE_IMAGE_NAME="bazzite-gnome"
 ARG BASE_IMAGE_VENDOR="ublue-os"
@@ -91,6 +107,19 @@ RUN dnf install -y gstreamer1-vaapi
 RUN dnf install -y libaacs
 RUN dnf install -y libbdplus
 RUN dnf install -y libbluray
+RUN dnf install -y gnome-shell-extension-caffeine
+RUN dnf install -y podman-compose
+RUN dnf install -y qt6ct
+RUN dnf install -y libvirt-client
+RUN dnf install -y qemu-kvm
+RUN dnf install -y libvirt-daemon-kvm
+RUN dnf install -y libvirt-daemon-config-network
+RUN dnf install -y virt-install
+RUN dnf install -y edk2-ovmf
+RUN dnf install -y swtpm
+RUN dnf install -y virt-top
+RUN dnf install -y libguestfs-tools
+RUN dnf install -y bridge-utils
 RUN dnf install -y android-tools
 RUN sed -i 'enabled=1/s/enabled=0/' /etc/yum.repos.d/fedora-cisco-openh264.repo
 RUN sed -i 'enabled=1/s/enabled=0/' /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:phracek:PyCharm.repo
@@ -136,6 +165,10 @@ RUN echo 'import "/usr/share/sharkfin/90-sharkfin-waydroid.just"' | tee -a "/usr
 RUN cp -v "/usr/share/vibrant-updater/VibrantUpdater.desktop" "/usr/share/applications/VibrantUpdater.desktop"
 RUN sed -i '${BASE_IMAGE_NAME}/s/${IMAGE_NAME}' /usr/share/ublue-os/image-info.json
 RUN sed -i '${BASE_IMAGE_VENDOR}/s/${IMAGE_VENDOR}' /usr/share/ublue-os/image-info.json
+RUN systemctl enable podman.socket
+RUN systemctl enable podman-auto-update
+RUN systemctl enable libvirtd.service
+RUN systemctl enable libvirtd.socket
 RUN glib-compile-schemas /usr/share/glib-2.0/schemas
 RUN dnf clean all
 RUN rm -rfv /tmp/*
