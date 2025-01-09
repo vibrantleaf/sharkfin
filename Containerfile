@@ -1,9 +1,9 @@
-##############################################################
-### Start of vibrant-updater                               ###
-### LICENSE: BSD 3-Clause                                  ###
-### author: vibrantleaf                                    ###
-### from https://codeberg.org/vibrantleaf/vibrant-updater/ ###
-##############################################################
+###############################################################
+### Start of vibrant-updater                                ###
+### LICENSE: BSD 3-Clause                                   ###
+### author: vibrantleaf                                     ###
+### from: https://codeberg.org/vibrantleaf/vibrant-updater/ ###
+#########@#####################################################
 
 FROM cgr.dev/chainguard/git:latest AS git
 RUN git clone https://codeberg.org/vibrantleaf/vibrant-updater.git /home/git/source/
