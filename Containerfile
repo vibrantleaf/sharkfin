@@ -63,6 +63,7 @@ ARG UBLUE_TAG=${FEDORA_MAJOR_VERSION}-latest
 FROM ghcr.io/ublue-os/bazzite-deck-gnome:latest 
 ARG AKMODS_FLAVOR="coreos-stable"
 ARG BASE_IMAGE_NAME="bazzite-gnome"
+ARG BASE_IMAGE_VENDOR="ublue-os"
 ARG IMAGE_NAME="sharkfin"
 ARG IMAGE_VENDOR="vibrantleaf"
 ARG SHA_HEAD_SHORT="dedbeef"
@@ -133,6 +134,8 @@ RUN sed -i 'enabled=1/s/enabled=0/' /etc/yum.repos.d/tailscale.repo
 RUN echo 'import "/usr/share/vibrant-updater/VibrantUpdater.just"' | tee -a "/usr/share/ublue-os/justfile"
 RUN echo 'import "/usr/share/sharkfin/90-sharkfin-waydroid.just"' | tee -a "/usr/share/ublue-os/justfile"
 RUN cp -v "/usr/share/vibrant-updater/VibrantUpdater.desktop" "/usr/share/applications/VibrantUpdater.desktop"
+RUN sed -i '${BASE_IMAGE_NAME}/s/${IMAGE_NAME}' /usr/share/ublue-os/image-info.json
+RUN sed -i '${BASE_IMAGE_VENDOR}/s/${IMAGE_VENDOR}' /usr/share/ublue-os/image-info.json
 RUN glib-compile-schemas /usr/share/glib-2.0/schemas
 RUN dnf clean all
 RUN rm -rfv /tmp/*
