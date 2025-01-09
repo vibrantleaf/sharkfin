@@ -48,12 +48,13 @@ RUN vibrant-updater --version
 ### End of vibrant-updater ###
 ##############################
 
-###################################
-### Start of Sharkfin           ###
-### LICENSE: Apache-2.0         ###
-### author: Universal Blue team ###
-### author: vibrantleaf         ###
-###################################
+#####################################################
+### Start of Sharkfin                             ###
+### LICENSE: Apache-2.0                           ###
+### author: Universal Blue team                   ###
+### author: vibrantleaf                           ###
+### from: https://github.com/vibrantleaf/sharkfin ### 
+#####################################################
 
 ARG BASE_IMAGE_NAME=" bazzite-deck-gnome"
 ARG FEDORA_MAJOR_VERSION="41"
